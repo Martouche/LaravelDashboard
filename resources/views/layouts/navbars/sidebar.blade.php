@@ -11,6 +11,20 @@
                     <p>{{ __('Dashboard') }}</p>
                 </a>
             </li>
+
+            <li @if ($pageSlug == 'runsheet') class="active " @endif>
+                <a href="{{ route('home') }}">
+                    <i class="tim-icons icon-trophy"></i>
+                    <p>{{ __('Run Sheet') }}</p>
+                </a>
+            </li>
+
+            <li @if ($pageSlug == 'Setup Sheet') class="active " @endif>
+                <a href="{{ route('home') }}">
+                    <i class="tim-icons icon-settings-gear-63"></i>
+                    <p>{{ __('Setup Sheet') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
