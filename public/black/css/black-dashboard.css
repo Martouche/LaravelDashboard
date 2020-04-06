@@ -16568,6 +16568,21 @@ textarea.form-control:active {
 }
 
 /*
+ * Custom style
+ */
+ .scrollable-menu {
+  height: auto;
+  max-height: 500px;
+  overflow-x: hidden;
+}
+ .customClassForDropDown
+    {
+       height: 100px;
+       overflow-y: auto;
+    }
+
+
+/*
  * Container style
  */
 

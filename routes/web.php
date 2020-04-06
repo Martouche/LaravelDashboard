@@ -17,9 +17,8 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/runsheet', function () {
-    return view('runsheet');
-})->name('runsheet');
+Route::get('/runsheet', 'RunsheetController@index')->name('runsheet');
+
 
 Route::get('/setupsheet', function () {
     return view('setupsheet');

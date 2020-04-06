@@ -1,89 +1,118 @@
 @extends('layouts.app', ['pageSlug' => 'home'])
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-chart">
-                <div class="card-header ">
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            <h2 class="card-title">Notre Run Sheet</h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                            <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                <input type="radio" name="options" checked>
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-single-02"></i>
-                                </span>
-                            </label>
-                            <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                <input type="radio" class="d-none d-sm-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-gift-2"></i>
-                                </span>
-                            </label>
-                            <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                <input type="radio" class="d-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-tap-02"></i>
-                                </span>
-                            </label>
-                            </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-2 btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Select Event
+                        </button>
+                        <div class="dropdown-menu scrollable-menu">
+                            @foreach($events as $event)
+                            <a class="dropdown-item" href="#">{{ $event->Event }}</a>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="Pilote_form" align="center">
-                        <form id="first_form" name="first_form" action="/action_page.php">
-                            <label for="fname">Pilote name:</label><br>
-                            <input type="text" id="pilote_name" name="pilote_name" placeholder="MASSA"><br>
-                            <label for="lname">Id of the RUN:</label><br>
-                            <input type="text" id="lname" name="lname" placeholder="Id"><br>
-                            <button type="submit" formaction="/setupsheet">Set Up</button><br>
-                        </form>
-                    </div>
-                    <div class="Pre_Comment_form">
-                        <form id="second_form" name="second_form" action="/action_page.php">
-                            <label for="fname">Comment Pre RUN Race :</label><br>
-                            <input type="text" id="comment_pre_run_race" name="comment_pre_run_race"><br>
-                            <label for="fname">Comment Pre RUN Race :</label><br>
-                            <input type="text" id="comment_pre_run_perf" name="comment_pre_run_perf"><br>
-                            <label for="fname">Setup Overview :</label><br>
-                            <input type="text" id="setup_over" name="setup_over"><br>
-                            <label for="fname">Setup Change :</label><br>
-                            <input type="text" id="setup_change" name="setup_change"><br>                            <input type="submit" value="Valider">
-                            <label for="fname">software Change :</label><br>
-                            <input type="text" id="software_change" name="software_change"><br>                          </form>
-                    </div>
-                    <div class="End_Comment_form">
-                        <form id="fourth_form" name="fourth_form" action="/action_page.php">
-                            <label for="fname">Comment End RUN Driver :</label><br>
-                            <input type="text" id="comment_end_driver" name="comment_end_driver"><br>                            <label for="fname">Comment End RUN Race :</label><br>
-                            <input type="text" id="comment_end_run_race" name="comment_end_run_race"><br>
-                            <label for="fname">Comment End RUN Race :</label><br>
-                            <input type="text" id="comment_end_run_perf" name="comment_end_run_perf"><br>
-                            <label for="fname">Comment End RUN System :</label><br>
-                            <input type="text" id="comment_end_system" name="comment_end_system"><br>                            <input type="submit" value="Valider">
-                     </form>
+                    <div class="col-sm-2 btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Select session </button>
+                        <div class="dropdown-menu scrollable-menu">
+                            @foreach($sessionLabel as $session)
+                            <a class="dropdown-item" href="#">{{ $session->Name }}</a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="chartBig1"></canvas>
+                <div class="card card-nav-tabs">
+                    <div class="card-header card-header-primary text-center">
+                        RunSheet
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Comment Pre Run Race">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Run Pro">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Comment End Run Driver">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Comment Pre Run Perf">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Setup overview">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Setup Change">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Software Change">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder="Start resume of the best lap push">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder="Start resume of the best lap energy">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder="Start resume of the best lap selected">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Tire Pressure Cold 20">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Temperature resume of best lap">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('js')
-    <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script>
-    <script>
-        $(document).ready(function() {
+<script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script>
+<script>
+    $(document).ready(function() {
           demo.initDashboardPageCharts();
         });
-    </script>
+</script>
+
+<script>
+    $(".dropdown-menu li a").click(function(){
+  $(this).parents(".dropdown").find('.btn').html($(this).text());
+  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+});
+</script>
 @endpush
