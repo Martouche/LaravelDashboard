@@ -17,6 +17,14 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('/runsheet', function () {
+    return view('runsheet');
+})->name('runsheet');
+
+Route::get('/setupsheet', function () {
+    return view('setupsheet');
+})->name('setupsheet');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -40,4 +48,3 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
-

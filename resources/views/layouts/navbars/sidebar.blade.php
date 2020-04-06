@@ -12,17 +12,24 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'runsheet') class="active " @endif>
-                <a href="{{ route('home') }}">
+            <li @if ($pageSlug == 'Run Sheet') class="active " @endif>
+                <a href="{{ route('runsheet') }}">
                     <i class="tim-icons icon-trophy"></i>
                     <p>{{ __('Run Sheet') }}</p>
                 </a>
             </li>
 
             <li @if ($pageSlug == 'Setup Sheet') class="active " @endif>
-                <a href="{{ route('home') }}">
+                <a href="{{ route('setupsheet') }}">
                     <i class="tim-icons icon-settings-gear-63"></i>
                     <p>{{ __('Setup Sheet') }}</p>
+                </a>
+            </li>
+
+            <li @if ($pageSlug == 'Stats Sheet') class="active " @endif>
+                <a href="{{ route('home') }}">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>{{ __('Stats Sheet') }}</p>
                 </a>
             </li>
         </ul>
