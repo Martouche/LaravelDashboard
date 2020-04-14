@@ -8,7 +8,7 @@ use Illuminate\View\View;
 use App\Session;
 use App\SessionLabel;
 use App\Event;
-
+use Illuminate\Http\Request;
 
 /**
  * Class ManageController
@@ -22,5 +22,10 @@ class RunsheetController extends Controller {
             'sessionLabel' => SessionLabel::all(),
             'events' => Event::all(),
         ]);
+    }
+
+    public function getEvent(Request $req) {
+        $name = $req->input('name');
+        dd($name);
     }
 }
