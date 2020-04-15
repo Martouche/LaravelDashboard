@@ -126,9 +126,17 @@
         $('.eventname').html($(this).html());
         console.log($(this).text());
         $.ajax({
-            url: '{{ route('runsheet') }}',
+            url: '{{ route('runsheetgetevent') }}',
             type: "POST",
-            data: $(this).text(),
+            data: {
+                name: $(this).text()
+            },
+            success: (data) => {
+                console.log(data);
+            },
+            error: (err) => {
+                console.log(err);
+            }
         });
     })
 

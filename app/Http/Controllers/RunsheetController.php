@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
  */
 class RunsheetController extends Controller {
 
-    public function index() {
+    public function index(Request $req) {
         return view('runsheet', [
             'session' => Session::all(),
             'sessionLabel' => SessionLabel::all(),
@@ -26,6 +26,9 @@ class RunsheetController extends Controller {
 
     public function getEvent(Request $req) {
         $name = $req->input('name');
-        dd($name);
+        return json_encode([
+            'name' => $name,
+            'sessions' => Session::where()
+        ]);
     }
 }

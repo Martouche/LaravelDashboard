@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/runsheet', 'RunsheetController@index')->name('runsheet');
-Route::post('/runsheet', 'RunsheetController@getEvent');
+Route::post('/geteven', 'RunsheetController@getEvent')->name('runsheetgetevent');
 
 
 Route::get('/setupsheet', function () {
