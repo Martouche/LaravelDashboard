@@ -25,7 +25,7 @@
                         <div class="dropdown-menu scrollable-menu sessiondrop">
                             @foreach($sessionLabel as $session)
                             @foreach ($session as $sess)
-                            <a class="dropdown-item" href="#">{{ $session->Name }}</a>                                
+                            <a class="dropdown-item" href="#">{{ $session->Name }}</a>
                             @endforeach
                             @endforeach
                         </div>
@@ -98,6 +98,45 @@
                                     </div>
                                 </div>
                             </form>
+                                    <div class="card card-nav-tabs">
+                                        <div class="card-header card-header-primary text-center">
+                                            Lap Field
+                                        </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">NLAP</th>
+                                                <th scope="col">Laptime</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">IP1</th>
+                                                <th scope="col">IP2</th>
+                                                <th scope="col">IP3</th>
+                                                <th scope="col">Elaps</th>
+                                                <th scope="col">TCell</th>
+                                                <th scope="col">ERem</th>
+                                                <th scope="col">TTB</th>
+                                                <th scope="col">BRK</th>
+                                                <th scope="col">DIFF</th>
+                                                <th scope="col">OT</th>
+                                                <th scope="col">LTHB</th>
+                                                <th scope="col">Driver</th>
+                                                <th scope="col">Comm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                         </div>
                         <div class="card-footer text-muted">
                         </div>
@@ -132,8 +171,8 @@
         });
     })
 
-    $('.sessiondrop a').on('click', function(){    
-        $('.sessionname').html($(this).html());    
+    $('.sessiondrop a').on('click', function(){
+        $('.sessionname').html($(this).html());
     })
     </script>
     @endpush
