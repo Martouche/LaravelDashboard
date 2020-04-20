@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use App\Session;
 use App\SessionLabel;
 use App\Event;
+use App\Season;
 use Illuminate\Http\Request;
 
 /**
@@ -21,14 +22,21 @@ class RunsheetController extends Controller {
             'session' => Session::all(),
             'sessionLabel' => SessionLabel::all(),
             'events' => Event::all(),
+            'seasons' => Season::all(),
         ]);
     }
 
     public function getEvent(Request $req) {
-        $name = $req->input('name');
+    }
+
+    public function getSeason(Request $req) {
+        $season = $req->input('season');
+        $id = Season::where('Season', $season)->first();
+        $eventseason = Event::where('Season_ID', $id->Season_ID)->get();
         return json_encode([
-            'name' => $name,
-            'sessions' => Session::where()
+            'season' => $season,
+            'season_id' => $id->Season_ID,
+            'event' => $eventseason,
         ]);
     }
 }

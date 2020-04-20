@@ -6,18 +6,28 @@
         <div class="card card-chart">
             <div class="card-header ">
                 <div class="row">
-                    <div class="col-sm-2 btn-group">
-                        <button id="eventname" type="button" class="btn btn-secondary dropdown-toggle eventname" data-toggle="dropdown"
+                    <div class="col-sm-3 btn-group">
+                        <button id="seasonname" type="button" class="btn btn-secondary dropdown-toggle seasonname" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Select Event
+                            Select Season
                         </button>
-                        <div class="dropdown-menu scrollable-menu eventdrop">
-                            @foreach($events as $event)
-                            <a class="dropdown-item" href="#">{{ $event->Event }}</a>
+                        <div class="dropdown-menu scrollable-menu seasondrop">
+                            @foreach($seasons as $season)
+                            <a class="dropdown-item" href="#">{{ $season->Season }}</a>
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-sm-2 btn-group">
+                    <div class="col-sm-3 btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle eventname" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Select Event
+                        </button>
+                        <div id="eventname" class="dropdown-menu scrollable-menu eventdrop">
+                            <a class="dropdown-item">test1</a>
+                            <a class="dropdown-item">test2</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle sessionname" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Select session
@@ -160,27 +170,34 @@
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
-});
-        $('.eventdrop a').on('click', function(){
-        $('.eventname').html($(this).html());
-        console.log($(this).text());
+    });
+
+    $('.sessiondrop a').on('click', function(){
+        $('.sessionname').html($(this).html());
+    })
+
+    $('.seasondrop a').on('click', function(){
+        $('.seasonname').html($(this).html());
         $.ajax({
-            url: '{{ route('runsheetgetevent') }}',
+            url: '{{ route('runsheetgetseason') }}',
             type: "POST",
             data: {
-                name: $(this).text()
+                season: $(this).text()
             },
-            success: (data) => {
-                console.log(data);
-            },
-            error: (err) => {
-                console.log(err);
+            success: function(data) {
+                let json = JSON.parse(data)
+                var $dropdown = $(".eventdrop");
+                $dropdown.children().remove();
+                json.event.forEach(element => {
+                   $dropdown.append("<a class=" + "dropdown-item" + ">" + element.Event + "</a>");
+                });
             }
         });
     })
 
-    $('.sessiondrop a').on('click', function(){
-        $('.sessionname').html($(this).html());
+    $('.eventdrop .dropdown-item').on('click', function(){
+        $(this).parents(".btn-group").find('.btn').text($(this).text());
+        console.log("test");
     })
     </script>
     @endpush

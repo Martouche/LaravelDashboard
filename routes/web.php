@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::get('/runsheet', 'RunsheetController@index')->name('runsheet');
 Route::post('/geteven', 'RunsheetController@getEvent')->name('runsheetgetevent');
+Route::post('/getseason', 'RunsheetController@getSeason')->name('runsheetgetseason');
+
 
 
 Route::get('/setupsheet', function () {
