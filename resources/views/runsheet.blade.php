@@ -20,11 +20,12 @@
                     <div class="col-sm-3 btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle eventname" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Select Event
+                            Select Event ID
                         </button>
                         <div id="eventname" class="dropdown-menu scrollable-menu eventdrop">
-                            <a class="dropdown-item">test1</a>
-                            <a class="dropdown-item">test2</a>
+                            @foreach($events as $event)
+                            <a class="dropdown-item" href="#">{{ $event->Event_ID }}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-sm-3 btn-group">
