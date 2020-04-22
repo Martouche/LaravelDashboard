@@ -5,44 +5,49 @@
         <div class="col-md-5 ml-auto">
             <div class="info-area info-horizontal mt-5">
                 <div class="icon icon-warning">
-                    <i class="tim-icons icon-wifi"></i>
+                    <i class="tim-icons icon-world"></i>
                 </div>
                 <div class="description">
-                    <h3 class="info-title">{{ __('Marketing') }}</h3>
+                    <h3 class="info-title">{{ __('Venturi') }}</h3>
                     <p class="description">
-                        {{ __('We\'ve created the marketing campaign of the website. It was a very interesting collaboration.') }}
+                        {{ __('Défis technologiques et humains, les Venturi Global Challenges nous permettent de repousser les limites du véhicule électrique tout en rendant hommage aux plus grandes épopées automobiles du siècle dernier.') }}
                     </p>
                 </div>
             </div>
+            <br>
+            <br>
             <div class="info-area info-horizontal">
                 <div class="icon icon-primary">
-                    <i class="tim-icons icon-triangle-right-17"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <div class="description">
-                    <h3 class="info-title">{{ __('Fully Coded in HTML5') }}</h3>
+                    <h3 class="info-title">{{ __('Racing') }}</h3>
                     <p class="description">
-                        {{ __('We\'ve developed the website with HTML5 and CSS3. The client has access to the code using GitHub.') }}
+                        {{ __('Première équipe à s’être engagée dans le Championnat du monde de Formule Électrique, Venturi concourt désormais sous le nom de ROKiT Venturi Racing. ') }}
                     </p>
                 </div>
             </div>
+            <br>
+            <br>
             <div class="info-area info-horizontal">
                 <div class="icon icon-info">
                     <i class="tim-icons icon-trophy"></i>
                 </div>
                 <div class="description">
-                    <h3 class="info-title">{{ __('Built Audience') }}</h3>
+                    <h3 class="info-title">{{ __('Voxan Motors') }}</h3>
                     <p class="description">
-                        {{ __('There is also a Fully Customizable CMS Admin Dashboard for this product.') }}
+                        {{ __('L’emblématique marque française de moto Voxan a pris le virage de la motorisation électrique en 2010 lors de son rachat par Venturi.') }}
                     </p>
                 </div>
             </div>
         </div>
         <div class="col-md-7 mr-auto">
+            <img class="card-img" src="{{ asset('black') }}/img/card-primary.png" alt="Card image">
+            <br>
+            <br>
+            <br>
             <div class="card card-register card-white">
-                <div class="card-header">
-                    <img class="card-img" src="{{ asset('black') }}/img/card-primary.png" alt="Card image">
-                    <h4 class="card-title">{{ __('Register') }}</h4>
-                </div>
+                <br>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
 
@@ -72,7 +77,7 @@
                                 </div>
                             </div>
                             <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}">
-                            @include('alerts.feedback', ['field' => 'password'])
+                            @include('alerts.feedback', ['field' => 'mot de passe'])
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -87,12 +92,12 @@
                                 <input class="form-check-input" type="checkbox">
                                 <span class="form-check-sign"></span>
                                 {{ __('I agree to the') }}
-                                <a href="#">{{ __('terms and conditions') }}</a>.
+                                <a href="#">{{ __('termes et conditions') }}</a>.
                             </label>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Connexion') }}</button>
+                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Créer son compte') }}</button>
                     </div>
                 </form>
             </div>
