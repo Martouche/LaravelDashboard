@@ -15,7 +15,9 @@ use Illuminate\Http\Request;
  * Class ManageController
  * @package App\Http\Controllers
  */
+
 class RunsheetController extends Controller {
+    var $season;
 
     public function index(Request $req) {
         return view('runsheet', [
@@ -27,14 +29,29 @@ class RunsheetController extends Controller {
     }
 
     public function getEvent(Request $req) {
+        $session = [];
+        $event = $req->input("event");
+        $seasonid = Season::where('Season', session()->get('season'))->first();
+        $eventid = Event::select('*')
+            ->where('Event', '=', $event)
+            ->where('Season_ID', '=', $seasonid->Season_ID)
+            ->first();
+        $sessionid = Session::where('Event_ID', $eventid->Event_ID)->get();
+        foreach ($sessionid as $sess) {
+            array_push($session, SessionLabel::where('Session_ID', $sess->SessionLabel_ID)->first());
+        }
+        return json_encode([
+            'sessionName' => $session
+        ]);
     }
 
     public function getSeason(Request $req) {
-        $season = $req->input('season');
-        $id = Season::where('Season', $season)->first();
+        $this->season = $req->input('season');
+        session(['season' => $this->season]);
+        $id = Season::where('Season', $this->season )->first();
         $eventseason = Event::where('Season_ID', $id->Season_ID)->get();
         return json_encode([
-            'season' => $season,
+            'season' => $this->season ,
             'season_id' => $id->Season_ID,
             'event' => $eventseason,
         ]);
