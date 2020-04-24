@@ -9,6 +9,7 @@ use App\Session;
 use App\SessionLabel;
 use App\Event;
 use App\Season;
+use App\Run;
 use Illuminate\Http\Request;
 
 /**
@@ -28,6 +29,26 @@ class RunsheetController extends Controller {
         ]);
     }
 
+    public function getSession(Request $req) {
+        $runarraynb = [];
+        $runarray = [];
+        $session = $req->input('session');
+        $sessionlabelid = SessionLabel::where('Name', $session)->first();
+        $sessionid = Session::select('*')
+            ->where('SessionLabel_ID', '=', $sessionlabelid->Session_ID)
+            ->where('Event_ID', '=', session()->get('event')->Event_ID)
+            ->get();
+        foreach ($sessionid as $sess) {
+            array_push($runarraynb, Run::where('Session_ID', $sess->Session_ID)->count());
+            array_push($runarray, Run::where('Session_ID', $sess->Session_ID)->get());
+        }
+        
+        return json_encode([
+            'runsnb' => $runarraynb,
+            'runs' => $runarray
+        ]);
+    }
+
     public function getEvent(Request $req) {
         $session = [];
         $event = $req->input("event");
@@ -36,6 +57,7 @@ class RunsheetController extends Controller {
             ->where('Event', '=', $event)
             ->where('Season_ID', '=', $seasonid->Season_ID)
             ->first();
+        session(['event' => $eventid]);
         $sessionid = Session::where('Event_ID', $eventid->Event_ID)->get();
         foreach ($sessionid as $sess) {
             array_push($session, SessionLabel::where('Session_ID', $sess->SessionLabel_ID)->first());

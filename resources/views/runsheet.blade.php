@@ -156,8 +156,17 @@
   }
     });
 
-    $('.sessiondrop a').on('click', function(){
-        $('.sessionname').html($(this).html());
+    $('#session').change(function(){
+        $.ajax({
+            url: '{{ route('runsheetgetsession') }}',
+            type: "POST",
+            data: {
+                session: $('#session option:selected').text()
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
     })
 
     $('#season').change(function(){
@@ -170,7 +179,6 @@
             success: function(data) {
                 $("#event").find("option").remove();
                 let json = JSON.parse(data)
-                console.log(json.season);
                 json.event.forEach(element => {
                     let option = new Option(element.Event, element.Event_ID)
                     $(option).html(element.Event);
