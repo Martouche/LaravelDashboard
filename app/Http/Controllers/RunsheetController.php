@@ -31,21 +31,20 @@ class RunsheetController extends Controller {
 
     public function getSession(Request $req) {
         $runarraynb = [];
-        $runarray = [];
         $session = $req->input('session');
         $sessionlabelid = SessionLabel::where('Name', $session)->first();
         $sessionid = Session::select('*')
             ->where('SessionLabel_ID', '=', $sessionlabelid->Session_ID)
             ->where('Event_ID', '=', session()->get('event')->Event_ID)
-            ->get();
-        foreach ($sessionid as $sess) {
-            array_push($runarraynb, Run::where('Session_ID', $sess->Session_ID)->count());
-            array_push($runarray, Run::where('Session_ID', $sess->Session_ID)->get());
-        }
+            ->first();
+        $runarray = Run::where('Session_ID', $sessionid->Session_ID)->get();
         
         return json_encode([
-            'runsnb' => $runarraynb,
-            'runs' => $runarray
+            'session' => $sessionid,
+            'runs' => $runarray,
+            'view' => view('runsheet_list')
+                ->with('runs', $runarray)
+                ->render(),
         ]);
     }
 
