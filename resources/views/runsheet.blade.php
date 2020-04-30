@@ -31,11 +31,11 @@
                             <option selected>Select Session</option>
                         </select>
                     </div>
-                    <div class="card card-nav-tabs">
+                    <div id="runsheets" class="card card-nav-tabs">
                         <div class="card-header card-header-primary text-center">
                             RunSheet
                         </div>
-                        <div class="card-body">
+                        <div id="testi" class="card-body">
                             <form>
                                 <div class="form-group">
                                     <div class="row mb-2">
@@ -170,7 +170,11 @@
                 session: $('#session option:selected').text()
             },
             success: function(data) {
-                console.log(data);
+                let json = JSON.parse(data)
+                console.log(json);
+                json.runs.forEach(element => {
+                    $('#runsheets').append($('#testi'));
+                });
             }
         });
     })
