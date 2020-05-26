@@ -10,6 +10,7 @@ use App\SessionLabel;
 use App\Event;
 use App\Season;
 use App\Run;
+use App\Laps;
 use Illuminate\Http\Request;
 
 /**
@@ -38,12 +39,18 @@ class RunsheetController extends Controller {
             ->where('Event_ID', '=', session()->get('event')->Event_ID)
             ->first();
         $runarray = Run::where('Session_ID', $sessionid->Session_ID)->get();
-        
+        $laps = Laps::select('*')
+            ->where('Session_ID', '=', 2)
+            ->where('Driver_ID', '=', 7)
+            ->where('Run_ID', '=', 1)
+            ->get();
         return json_encode([
+            'laps' => $laps,
             'session' => $sessionid,
             'runs' => $runarray,
             'view' => view('runsheet_list')
                 ->with('runs', $runarray)
+                ->with('laps', $laps)
                 ->render(),
         ]);
     }

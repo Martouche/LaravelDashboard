@@ -66,7 +66,6 @@
                 </div>
             </div>
         </form>
-        <div class="card card-nav-tabs">
             <div class="card-header card-header-primary text-center">
                 Lap Field
             </div>
@@ -92,17 +91,44 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($laps as $lap)
                     <tr>
-                        <td>1</td>
+                        <td>{{ $lap->Lap_ID }}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
-        </div>
+    </div>
+    <div class="mb-4">
+        <h6 class="text-uppercase"></h6>
+        <!-- Solid divider -->
+        <hr class="solid">
     </div>
     @endforeach
+    <style>
+        hr.solid {
+    border-top: 2px solid #999;
+}
+hr.hr-text {
+  position: relative;
+    border: none;
+    height: 1px;
+    background: #999;
+}
+
+hr.hr-text::before {
+    content: attr(data-content);
+    display: inline-block;
+    background: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: #999;
+    border-radius: 30rem;
+    padding: 0.2rem 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    </style>
