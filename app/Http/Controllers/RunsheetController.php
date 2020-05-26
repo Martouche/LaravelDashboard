@@ -11,6 +11,8 @@ use App\Event;
 use App\Season;
 use App\Run;
 use App\Laps;
+use App\Drivers;
+use Doctrine\DBAL\Driver\DrizzlePDOMySql\Driver;
 use Illuminate\Http\Request;
 
 /**
@@ -30,27 +32,37 @@ class RunsheetController extends Controller {
         ]);
     }
 
+    public function getDriver(Request $req) {
+        $driver = $req->input("driver");
+        $driverok = Drivers::where('Name', $driver)->first();
+        session(['driver' => $driverok]);
+    }
+
     public function getSession(Request $req) {
-        $runarraynb = [];
+        $lapsarray = [];
         $session = $req->input('session');
         $sessionlabelid = SessionLabel::where('Name', $session)->first();
         $sessionid = Session::select('*')
             ->where('SessionLabel_ID', '=', $sessionlabelid->Session_ID)
             ->where('Event_ID', '=', session()->get('event')->Event_ID)
             ->first();
-        $runarray = Run::where('Session_ID', $sessionid->Session_ID)->get();
-        $laps = Laps::select('*')
-            ->where('Session_ID', '=', 2)
-            ->where('Driver_ID', '=', 7)
-            ->where('Run_ID', '=', 1)
+        $runarray = Run::select('*')
+            ->where('Session_ID', '=', $sessionid->Session_ID)
+            ->where('Driver_ID', '=', session()->get('driver')->Driver_ID)
             ->get();
+        foreach($runarray as $run) {
+            array_push($lapsarray, Laps::select('*')
+                ->where('Session_ID', '=', $sessionid->Session_ID)
+                ->where('Run_ID', '=', $run->Run_ID)
+                ->get());
+            }
         return json_encode([
-            'laps' => $laps,
+            'laps' => $lapsarray,
             'session' => $sessionid,
             'runs' => $runarray,
             'view' => view('runsheet_list')
                 ->with('runs', $runarray)
-                ->with('laps', $laps)
+                ->with('laps', $lapsarray)
                 ->render(),
         ]);
     }

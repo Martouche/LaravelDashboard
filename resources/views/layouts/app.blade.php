@@ -181,7 +181,7 @@
             },
             success: function(data) {
                 let json = JSON.parse(data)
-                console.log(json.laps);
+                console.log(json);
                 $('#runsheets').append($(json.view));
             }
         });
@@ -221,6 +221,20 @@
                     $(option).html(element.Name);
                     $("#session").append(option);
                 })
+            }
+        });
+    })
+
+
+    $('#driver').change(function(){
+        $.ajax({
+            url: '{{ route('runsheetgetdriver') }}',
+            type: "POST",
+            data: {
+                driver: $('#driver option:selected').text()
+            },
+            success: function(data) {
+                console.log("ok");
             }
         });
     })

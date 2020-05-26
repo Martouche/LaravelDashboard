@@ -27,12 +27,21 @@
                         </select>
                     </div>
                     <div class="col-sm-3">
+                        <select id="driver" class="bg-light text-dark browser-default custom-select">
+                            <option selected>Select Driver</option>
+                            <option class="text-dark" value=11>Massa</option>
+                            <option class="text-dark" value=20>Mortara</option>
+                            <option class="text-dark" value=9>Nick</option>
+                            <option class="text-dark" value=4>Stoffel</option>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
                         <select id="session" class="bg-light text-dark browser-default custom-select">
                             <option selected>Select Session</option>
                         </select>
                     </div>
                     <div id="runsheets" class="card card-nav-tabs"></div>
-                    <div class="card-footer text-muted"></div>
                 </div>
             </div>
         </div>

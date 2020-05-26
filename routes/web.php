@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/runsheet', 'RunsheetController@index')->name('runsheet');
+Route::post('/getdriver', 'RunsheetController@getDriver')->name('runsheetgetdriver');
 Route::post('/geteven', 'RunsheetController@getEvent')->name('runsheetgetevent');
 Route::post('/getseason', 'RunsheetController@getSeason')->name('runsheetgetseason');
 Route::post('/getseassion', 'RunsheetController@getSession')->name('runsheetgetsession');
