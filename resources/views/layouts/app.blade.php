@@ -196,6 +196,8 @@
             },
             success: function(data) {
                 $("#event").find("option").remove();
+                let opt = new Option("Select event", 0);
+                $("#event").append(opt);
                 let json = JSON.parse(data)
                 json.event.forEach(element => {
                     let option = new Option(element.Event, element.Event_ID)
@@ -215,6 +217,8 @@
             },
             success: function(data) {
                 $("#session").find("option").remove();
+                let opt = new Option("Select session", 0);
+                $("#session").append(opt);
                 let json = JSON.parse(data);
                 json.sessionName.forEach(element => {
                     let option = new Option(element.Name, element.Session_ID)
