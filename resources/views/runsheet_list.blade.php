@@ -86,9 +86,7 @@
                             <td>-</td>
                             <td><input type="text" class="form-control" placeholder="Driver comments"></td>
                             <td><input type="text" class="form-control" placeholder="Engineer comments"></td>
-    
-    
-    
+                            
                         </tr>
                         @endforeach
                     </tbody>
