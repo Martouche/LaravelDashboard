@@ -1,6 +1,6 @@
-    @foreach ($runs as $run)
+@foreach($lapnb as $nblap)
     <div class="card-header card-header-primary text-center">
-        {{ $run->Setup_ID }}
+        Runsheet {{ $nblap+1 }}
     </div>
     <div class="card-body">
         <form>
@@ -91,12 +91,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($laps as $lap)
+                @foreach ($laps[$nblap] as $lap)
                     <tr>
-                        1
+                        <?php
+                        $laptime = gmdate("i:s", $lap->Laptime);
+                        $S1 = gmdate("i:s", $lap->S1Time);
+                        $S2 = gmdate("i:s", $lap->S2Time);
+                        $S3 = gmdate("i:s", $lap->S3Time);
+                        ?>
+                        <td>{{ $lap->LapNumber }}</td>
+                        <td>{{ $laptime }}</td>
+                        <td>{{ $lap->Type }}</td>
+                        <td>{{ $S1 }}</td>
+                        <td>{{ $S2 }}</td>
+                        <td>{{ $S3 }}</td>
+                        <td>{{ $lap->Elapsed }}</td>
+                        <td>-</td>
+                        <td>{{ $lap->ERemaining }}</td>
+                        <td>{{ $lap->Stats_ID }}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><input type="text" class="form-control" placeholder="Driver comments"></td>
+                        <td><input type="text" class="form-control" placeholder="Engineer comments"></td>
+
+
+
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
     </div>
     <div class="mb-4">

@@ -40,6 +40,8 @@ class RunsheetController extends Controller {
 
     public function getSession(Request $req) {
         $lapsarray = [];
+        $lapnb = [];
+        $i = 0;
         $session = $req->input('session');
         $sessionlabelid = SessionLabel::where('Name', $session)->first();
         $sessionid = Session::select('*')
@@ -54,14 +56,17 @@ class RunsheetController extends Controller {
             array_push($lapsarray, Laps::select('*')
                 ->where('Run_ID', '=', $run->Run_ID)
                 ->get());
+            array_push($lapnb, $i);
+            $i++;
             }
         return json_encode([
-            'laps' => $lapsarray,
+            'laps' => $lapnb,
             'session' => $sessionid,
             'runs' => $runarray,
             'view' => view('runsheet_list')
                 ->with('runs', $runarray)
                 ->with('laps', $lapsarray)
+                ->with('lapnb', $lapnb)
                 ->render(),
         ]);
     }
