@@ -1,6 +1,6 @@
     @foreach ($runs as $run)
     <div class="card-header card-header-primary text-center">
-        {{ $run->Run_Label }}
+        {{ $run->Setup_ID }}
     </div>
     <div class="card-body">
         <form>
@@ -91,7 +91,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($laps as $lap)
+                    <tr>
+                        1
+                    </tr>
                 </tbody>
+                @endforeach
             </table>
     </div>
     <div class="mb-4">

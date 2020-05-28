@@ -52,7 +52,6 @@ class RunsheetController extends Controller {
             ->get();
         foreach($runarray as $run) {
             array_push($lapsarray, Laps::select('*')
-                ->where('Session_ID', '=', $sessionid->Session_ID)
                 ->where('Run_ID', '=', $run->Run_ID)
                 ->get());
             }
