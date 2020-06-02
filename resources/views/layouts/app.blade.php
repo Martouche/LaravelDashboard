@@ -242,7 +242,14 @@
             }
         });
     })
-        </script>
+    function auto_height(elem) {
+    str = $("#drivercomment").val();
+    var i = str.split("\n").length - 1;
+    elem.style.height = ((Math.ceil(elem.value.length / 50) + i) * 19 + 20) + 'px';
+    console.log(i);
+    };
+       
+    </script>
         @stack('js')
     </body>
 </html>

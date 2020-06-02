@@ -84,13 +84,14 @@
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
-                            <td><input type="text" class="form-control" placeholder="Driver comments"></td>
-                            <td><input type="text" class="form-control" placeholder="Engineer comments"></td>
-                            
+                            <td><textarea id="drivercomment" class="auto_height" placeholder="Driver comments" name="" id="" cols="28" rows="1" oninput="auto_height(this)"></textarea></td>
+                            <td><textarea placeholder="Engeneers comments" name="" id="" cols="28" rows="1" oninput="auto_height(this)"></textarea></td>
+
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                
                 <br>
                 <br>
                 <div class="row mb-2">
@@ -155,4 +156,7 @@ hr.hr-text::before {
     transform: translate(-50%, -50%);
 }
 
-    </style>
+.auto_height { /* CSS */
+  width: 100%;
+}
+ </style>
